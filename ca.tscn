@@ -1,0 +1,366 @@
+[gd_scene load_steps=25 format=3 uid="uid://b8yipi1wbvr6i"]
+
+[ext_resource type="ArrayMesh" uid="uid://c3ijwah6ge61g" path="res://susann.res" id="1_0vich"]
+[ext_resource type="Shader" path="res://CAUSTIC.gdshader" id="4_c40w1"]
+[ext_resource type="Shader" path="res://GLASS.gdshader" id="4_rmnmi"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p7jva"]
+size = Vector2(20.385, 23.695)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jc43j"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ksf72"]
+
+[sub_resource type="Sky" id="Sky_7dhfc"]
+sky_material = SubResource("PhysicalSkyMaterial_ksf72")
+
+[sub_resource type="Environment" id="Environment_y53yy"]
+background_mode = 2
+sky = SubResource("Sky_7dhfc")
+ssao_enabled = true
+ssao_radius = 1.01
+ssao_intensity = 6.46
+ssao_detail = 2.46
+ssao_horizon = 0.25
+ssao_sharpness = 1.0
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+ssil_radius = 7.85
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bfyh5"]
+render_priority = 0
+shader = ExtResource("4_rmnmi")
+shader_parameter/albedo = Color(0, 1.50196, 1.50196, 0.588235)
+shader_parameter/roughness = 1.0
+shader_parameter/refraction = 0.500001
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/normal_strength = 0.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/surface_contribution = 0.01
+shader_parameter/specular_contribution = 0.2
+shader_parameter/refraction_contribution = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ny84x"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -1.995
+shader_parameter/caustic_contrast = 1.0
+shader_parameter/hash_scale = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kra2k"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -0.8
+shader_parameter/caustic_contrast = 4.05
+shader_parameter/hash_scale = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wj6b0"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -0.87
+shader_parameter/caustic_contrast = 2.37
+shader_parameter/hash_scale = 0.015
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrxd7"]
+render_priority = 0
+shader = ExtResource("4_rmnmi")
+shader_parameter/albedo = Color(1.91765, 0.298039, 0.2, 0.517647)
+shader_parameter/roughness = 0.067
+shader_parameter/refraction = 0.500001
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/normal_strength = 0.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/surface_contribution = 0.01
+shader_parameter/specular_contribution = 0.2
+shader_parameter/refraction_contribution = 1.0
+shader_parameter/uv1_scale = Vector3(5, 5, 5)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3vwm4"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -0.745
+shader_parameter/caustic_contrast = 4.27
+shader_parameter/hash_scale = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brog6"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -1.015
+shader_parameter/caustic_contrast = 5.355
+shader_parameter/hash_scale = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xmmto"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -1.19
+shader_parameter/caustic_contrast = 3.09
+shader_parameter/hash_scale = 0.015
+
+[sub_resource type="Animation" id="Animation_xdhlt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LIGHT:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 4.13, -2.27122)]
+}
+
+[sub_resource type="Animation" id="Animation_fwa5u"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LIGHT:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 4.13, -2.27122), Vector3(0, 4.13, 0.0415063)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_woutr"]
+_data = {
+"RESET": SubResource("Animation_xdhlt"),
+"new_animation": SubResource("Animation_fwa5u")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_n0gbt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7jpv"]
+render_priority = 0
+shader = ExtResource("4_rmnmi")
+shader_parameter/albedo = Color(1, 1, 1, 0.564706)
+shader_parameter/roughness = 0.27
+shader_parameter/refraction = 0.5
+shader_parameter/refraction_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/normal_strength = 7.6e-07
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+shader_parameter/surface_contribution = -0.065
+shader_parameter/specular_contribution = 0.125
+shader_parameter/refraction_contribution = 1.665
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wevlo"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -0.965
+shader_parameter/caustic_contrast = 5.325
+shader_parameter/hash_scale = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne5dp"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -0.965
+shader_parameter/caustic_contrast = 5.015
+shader_parameter/hash_scale = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuocc"]
+render_priority = 0
+shader = ExtResource("4_c40w1")
+shader_parameter/caustic = -0.965
+shader_parameter/caustic_contrast = 5.015
+shader_parameter/hash_scale = 0.005
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.60907, 0)
+layers = 7
+mesh = SubResource("PlaneMesh_p7jva")
+surface_material_override/0 = SubResource("StandardMaterial3D_jc43j")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.443071, -0.225977, 0.867538, 0, 0.967709, 0.252069, -0.896486, 0.111685, -0.428764, 4.38625, 1.21311, -1.77072)
+fov = 54.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_y53yy")
+
+[node name="LIGHT" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.13, -2.27122)
+
+[node name="R" type="OmniLight3D" parent="LIGHT"]
+light_color = Color(1, 0, 0, 1)
+light_energy = 3.035
+light_cull_mask = 4294966275
+shadow_enabled = true
+shadow_blur = 4.938
+shadow_caster_mask = 4294966275
+omni_range = 17.0557
+
+[node name="G" type="OmniLight3D" parent="LIGHT"]
+light_color = Color(0, 1, 0, 1)
+light_energy = 3.035
+light_cull_mask = 4294966277
+shadow_enabled = true
+shadow_blur = 4.938
+shadow_caster_mask = 4294966277
+omni_range = 17.0557
+
+[node name="B" type="OmniLight3D" parent="LIGHT"]
+light_color = Color(0, 0, 1, 1)
+light_energy = 3.035
+light_cull_mask = 4294966281
+shadow_enabled = true
+shadow_blur = 4.938
+shadow_caster_mask = 4294966281
+omni_range = 17.0557
+
+[node name="SAHSE" type="Node3D" parent="."]
+transform = Transform3D(0.147019, -0.527217, 0.836916, -0.0684804, 0.838655, 0.540342, -0.98676, -0.136753, 0.0871941, -2.38634, -0.453013, -2.01258)
+
+[node name="GLASS" type="MeshInstance3D" parent="SAHSE"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_bfyh5")
+
+[node name="R" type="MeshInstance3D" parent="SAHSE"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+layers = 2
+cast_shadow = 3
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ny84x")
+
+[node name="G" type="MeshInstance3D" parent="SAHSE"]
+transform = Transform3D(1, -1.49012e-08, 0, -7.45058e-08, 1, 5.96046e-08, 0, 2.98023e-08, 1, 0, 0, 0)
+layers = 4
+cast_shadow = 3
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_kra2k")
+
+[node name="B" type="MeshInstance3D" parent="SAHSE"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+layers = 8
+cast_shadow = 3
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_wj6b0")
+
+[node name="SAHSE2" type="Node3D" parent="."]
+transform = Transform3D(-0.610832, -0.463473, 0.641933, -0.0684804, 0.838655, 0.540342, -0.788793, 0.286098, -0.544015, -1.52074, -0.453013, 1.1967)
+
+[node name="GLASS" type="MeshInstance3D" parent="SAHSE2"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_vrxd7")
+
+[node name="R" type="MeshInstance3D" parent="SAHSE2"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+layers = 2
+cast_shadow = 3
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_3vwm4")
+
+[node name="G" type="MeshInstance3D" parent="SAHSE2"]
+transform = Transform3D(1, -1.49012e-08, 0, -7.45058e-08, 1, 5.96046e-08, 0, 2.98023e-08, 1, 0, 0, 0)
+layers = 4
+cast_shadow = 3
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_brog6")
+
+[node name="B" type="MeshInstance3D" parent="SAHSE2"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+layers = 8
+cast_shadow = 3
+mesh = ExtResource("1_0vich")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_xmmto")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_woutr")
+}
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.769063, 0.176909, 0)
+enable_shadows = true
+
+[node name="DIR_LIGHT" type="Node3D" parent="."]
+transform = Transform3D(-0.748502, -0.471968, 0.465823, -0.117422, 0.785689, 0.607376, -0.652654, 0.399924, -0.643509, 0, 0, 0)
+visible = false
+
+[node name="R" type="DirectionalLight3D" parent="DIR_LIGHT"]
+transform = Transform3D(1, 1.49012e-08, 1.49012e-08, 1.49012e-08, 1, -8.9407e-08, -1.49012e-08, 0, 1, 0, 0, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.465
+light_cull_mask = 4294966275
+shadow_enabled = true
+shadow_opacity = 0.65
+shadow_blur = 2.148
+shadow_caster_mask = 4294966275
+
+[node name="G" type="DirectionalLight3D" parent="DIR_LIGHT"]
+transform = Transform3D(1, 1.49012e-08, 1.49012e-08, 1.49012e-08, 1, -8.9407e-08, -1.49012e-08, 0, 1, 0, 0, 0)
+light_color = Color(0, 1, 0, 1)
+light_energy = 0.465
+light_cull_mask = 4294966277
+shadow_enabled = true
+shadow_opacity = 0.65
+shadow_blur = 2.148
+shadow_caster_mask = 4294966277
+
+[node name="B" type="DirectionalLight3D" parent="DIR_LIGHT"]
+transform = Transform3D(1, 1.49012e-08, 1.49012e-08, 1.49012e-08, 1, -8.9407e-08, -1.49012e-08, 0, 1, 0, 0, 0)
+light_color = Color(0, 0, 1, 1)
+light_energy = 0.465
+light_cull_mask = 4294966281
+shadow_enabled = true
+shadow_opacity = 0.65
+shadow_blur = 2.148
+shadow_caster_mask = 4294966281
+
+[node name="SAHSE3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05617, -0.687155, 2.53902)
+
+[node name="GLASS" type="MeshInstance3D" parent="SAHSE3"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_n0gbt")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_i7jpv")
+
+[node name="R" type="MeshInstance3D" parent="SAHSE3"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+layers = 2
+material_override = SubResource("ShaderMaterial_wevlo")
+cast_shadow = 3
+mesh = SubResource("SphereMesh_n0gbt")
+skeleton = NodePath("../..")
+
+[node name="G" type="MeshInstance3D" parent="SAHSE3"]
+transform = Transform3D(1, -1.49012e-08, 0, -7.45058e-08, 1, 5.96046e-08, 0, 2.98023e-08, 1, 0, 0, 0)
+layers = 4
+cast_shadow = 3
+mesh = SubResource("SphereMesh_n0gbt")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_ne5dp")
+
+[node name="B" type="MeshInstance3D" parent="SAHSE3"]
+transform = Transform3D(1, 0, -2.23517e-08, -5.96046e-08, 1, 1.49012e-08, 3.72529e-08, 2.98023e-08, 1, 0, 0, 0)
+layers = 8
+cast_shadow = 3
+mesh = SubResource("SphereMesh_n0gbt")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_cuocc")
